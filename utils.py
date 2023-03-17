@@ -36,17 +36,7 @@ class OpenAIDecodingArguments(object):
     echo: bool = False
 
 
-def openai_completion(
-    prompts: Union[str, Sequence[str], Sequence[dict[str, str]], dict[str, str]],
-    decoding_args: OpenAIDecodingArguments,
-    return_text,
-    model_name="text-davinci-003",
-    sleep_time=2,
-    batch_size=1,
-    max_instances=sys.maxsize,
-    max_batches=sys.maxsize,
-    **decoding_kwargs,
-) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
+def openai_completion(prompts: Union[str, Sequence[str], Sequence[dict[str, str]], dict[str, str]], decoding_args: OpenAIDecodingArguments, model_name="text-davinci-003", sleep_time=2, batch_size=1, max_instances=sys.maxsize, max_batches=sys.maxsize, return_text=False, **decoding_kwargs) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
     """Decode with OpenAI API.
 
     Args:
@@ -71,7 +61,6 @@ def openai_completion(
             - a list of objects of the above types (if decoding_args.n > 1)
     """
     
-    return_text=False
     is_single_prompt = isinstance(prompts, (str, dict))
     if is_single_prompt:
         prompts = [prompts]
