@@ -44,7 +44,7 @@ def openai_completion(
     batch_size=1,
     max_instances=sys.maxsize,
     max_batches=sys.maxsize,
-    return_text=False,
+    return_text,
     **decoding_kwargs,
 ):
     """Decode with OpenAI API.
@@ -70,6 +70,8 @@ def openai_completion(
             - an openai_object.OpenAIObject object (if return_text is False)
             - a list of objects of the above types (if decoding_args.n > 1)
     """
+    
+    return_text=False
     is_single_prompt = isinstance(prompts, (str, dict))
     if is_single_prompt:
         prompts = [prompts]
